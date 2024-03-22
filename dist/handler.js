@@ -15,14 +15,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ocrService = void 0;
 const tesseract_js_1 = __importDefault(require("tesseract.js"));
 const ocrService = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a, _b;
+    var _a;
     try {
         console.log("ocrService endpoint");
         if (!req.file) {
             return res.status(400).json({ error: "No file uploaded" });
         }
         const imgBuffer = (_a = req.file) === null || _a === void 0 ? void 0 : _a.buffer;
-        const imageName = (_b = req.file) === null || _b === void 0 ? void 0 : _b.originalname;
         const resultData = yield tesseract_js_1.default.recognize(imgBuffer, "eng");
         const extractedBboxes = resultData.data.words.map(word => ({
             [word.text]: word.bbox,
@@ -30,8 +29,6 @@ const ocrService = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
         const extractedText = resultData.data.words
             .map(word => word.text)
             .join(" ");
-        console.log("extractedText: ", extractedText);
-        console.log("extractedBboxes: ", extractedBboxes);
         res.setHeader("Content-Type", "application/json");
         res.status(200).json({
             extractedText,

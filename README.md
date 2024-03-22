@@ -22,6 +22,12 @@ Text Mapper Server is a Node.js application responsible for server-side image pr
     pnpm install
     ```
 
+4. Build the TypeScript code:
+
+    ```bash
+    pnpm run build
+    ```
+
 ## Usage
 
 To start the server, run:
