@@ -9,12 +9,12 @@
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
         "resolveJsonModule": true,
-        "outDir": "dist",
+        "outDir": "./dist",
         "baseUrl": ".",
         "paths": {
             "@/*": ["src/*"]
         }
     },
-    "include": ["./src/**/*"],
+    "include": ["./src/**/*", "src/server.ts"],
     "exclude": ["node_modules"]
 }
