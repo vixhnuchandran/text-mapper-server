@@ -9,7 +9,6 @@ const ocrService = async (req: Request, res: Response, next: NextFunction) => {
         }
 
         const imgBuffer = req.file?.buffer
-        const imageName = req.file?.originalname
 
         const resultData = await Tesseract.recognize(imgBuffer, "eng")
 
@@ -19,9 +18,6 @@ const ocrService = async (req: Request, res: Response, next: NextFunction) => {
         const extractedText = resultData.data.words
             .map(word => word.text)
             .join(" ")
-
-        console.log("extractedText: ", extractedText)
-        console.log("extractedBboxes: ", extractedBboxes)
 
         res.setHeader("Content-Type", "application/json")
         res.status(200).json({
